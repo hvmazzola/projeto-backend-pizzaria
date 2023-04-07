@@ -7,7 +7,7 @@ const UsuarioSchema = new mongoose.Schema({
     imagem: { type: String, required: true },
     endereços: [
         {
-            logradouro: { type: String, unique: true, required: true },
+            logradouro: { type: String, required: true },
             numero: { type: Number, required: true },
             bairro: { type: String, required: true },
             cidade: { type: String, required: true },
