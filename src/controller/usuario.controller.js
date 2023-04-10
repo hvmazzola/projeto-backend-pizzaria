@@ -36,7 +36,7 @@ const createUserController = async (req, res) => {
     try{
         const body = req.body;
 
-        if((!body.nome) || (!body.email) || (!body.senha) || (!body.admin)){
+        if((!body.nome) || (!body.email) || (!body.senha)){
             return res.status(400).send ({ message: "Algum campo obrigatório não foi preenchido." })
         }
 
@@ -70,10 +70,10 @@ const removeUserController = async (req, res) => {
 
         const deletedUser = await userService.removeUserService(req.params.id);
 
-        if(deletedUser.deletedCount > 0){
-            return res.status(200).send({ message: "Sucesso! Usuário deletado." });
-        } else {
+        if(deletedUser == null){
             return res.status(400).send({ message: "Usuário não encontrado. Tente novamente." });
+        } else {
+            return res.status(200).send({ message: "Sucesso! Usuário deletado." });            
         };
 
     }catch (err){
