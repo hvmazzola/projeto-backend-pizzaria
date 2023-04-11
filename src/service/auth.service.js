@@ -8,4 +8,4 @@ const generateToken = (userId) => jwt.sign({id: userId}, "cnjaAiwRTha2673baw8923
 module.exports = {
     loginService,
     generateToken
-}
+};
