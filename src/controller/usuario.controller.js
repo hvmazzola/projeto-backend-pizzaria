@@ -52,7 +52,7 @@ const updateUserController = async (req, res) => {
     try{
         const body = req.body;
 
-        if((!body.nome) || (!body.email) || (!body.senha) || (!body.admin)){
+        if((!body.nome) || (!body.email) || (!body.senha)){
             return res.status(400).send ({ message: "Algum campo obrigatório não foi preenchido. Tente novamente." })
         }
 
