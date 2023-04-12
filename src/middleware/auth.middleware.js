@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
         return res.status(401).send({ message: "O token não foi formulado corretamente. Tente novamente!"});
     }
 
-    jwt.verify(token, "cnjaAiwRTha2673baw8923b6f3B09wa8sn", async (err, decoded) => {
+    jwt.verify(token, process.env.SECRET, async (err, decoded) => {
         if(err){
             return res.status(500).send({ message: "Token inválido. Tente novamente!"});
         }
