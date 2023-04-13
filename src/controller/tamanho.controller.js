@@ -40,10 +40,6 @@ const createTamanhoController = async (req, res) => {
             createdAt: new Date(),
         }
 
-        //if((!body.nome) || (!body.diametro) || (!body.qntSabores) || (!body.valorBase) || (!body.bordaGratuita)){
-          //  return res.status(400).send ({ message: "Algum campo obrigatório não foi preenchido." })
-        //}
-
         return res.status(201).send(await tamanhoService.createTamanhoService(body));
 
     }catch (err){
@@ -54,14 +50,8 @@ const createTamanhoController = async (req, res) => {
 
 const updateTamanhoController = async (req, res) => {
     try{
-        const body = req.body;
-
-        //if((!body.nome) || (!body.diametro) || (!body.qntSabores) || (!body.valorBase) || (!body.bordaGratuita)){
-          //  return res.status(400).send ({ message: "Algum campo obrigatório não foi preenchido." })
-        //}
-
+        
         return res.status(200).send(await tamanhoService.updateTamanhoService(req.params.id, req.body));
-
 
     }catch (err){
         console.log(`erro: ${err.message}`);

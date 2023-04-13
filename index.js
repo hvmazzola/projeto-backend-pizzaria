@@ -5,6 +5,7 @@ const usuario = require("./src/router/usuario.router"); // arquivo de rotas do u
 const auth = require("./src/router/auth.router"); // arquivo de rotas de autenticação
 const tamanho = require("./src/router/tamanho.router"); // arquivo de rotas dos tamanhos
 const pizza = require("./src/router/pizza.router"); // arquivo de rotas das pizzas
+const carrinho = require("./src/router/carrinho.router"); // arquivo de rotas do carrinho
 
 
 
@@ -20,6 +21,7 @@ app.use("/usuario", usuario); // chamando rotas do usuário
 app.use("/auth", auth); // chamando rotas de autenticação
 app.use("/tamanho", tamanho); // chamando rotas dos tamanhos
 app.use("/pizza", pizza); // chamando rotas das pizzas
+app.use("/carrinho", carrinho); // chamando rotas do carrinho
 
 app.get ("/", (req, res) => {
     res.send({

@@ -3,7 +3,7 @@ const mongoose = require ("mongoose");
 const PizzaSchema = new mongoose.Schema({
     tamanho: [
         { 
-            _id: { type: String, required: true },
+            _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, ref: "tamanhos"},
         }
     ],
     sabores: [

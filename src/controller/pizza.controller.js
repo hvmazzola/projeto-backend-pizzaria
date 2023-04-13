@@ -40,10 +40,6 @@ const createPizzaController = async (req, res) => {
             createdAt: new Date(),
         }
 
-        //if((!body.nome) || (!body.email) || (!body.senha)){
-          //  return res.status(400).send ({ message: "Algum campo obrigatório não foi preenchido." })
-        //}
-
         return res.status(201).send(await pizzaService.createPizzaService(body));
 
     }catch (err){
@@ -54,14 +50,8 @@ const createPizzaController = async (req, res) => {
 
 const updatePizzaController = async (req, res) => {
     try{
-        const body = req.body;
-
-        //if((!body.nome) || (!body.email) || (!body.senha)){
-          //  return res.status(400).send ({ message: "Algum campo obrigatório não foi preenchido. Tente novamente." })
-        //}
 
         return res.status(200).send(await pizzaService.updatePizzaService(req.params.id, req.body));
-
 
     }catch (err){
         console.log(`erro: ${err.message}`);
