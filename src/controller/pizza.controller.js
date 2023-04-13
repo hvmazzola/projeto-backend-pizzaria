@@ -86,10 +86,35 @@ const removePizzaController = async (req, res) => {
     }
 };
 
+const addTamanhoPizzaController = async (req, res) => {
+    try{
+        req.body.createdAt = new Date();
+        const tamanho = await pizzaService.addTamanhoPizzaService(req.params.id, req.body);
+        return res.status(200).send(tamanho);
+
+    }catch (err){
+        console.log(`erro: ${err.message}`);
+        return res.status(500).send({ message: "Aconteceu um erro inesperado :( Tente novamente!"});
+    }
+};
+
+const removeTamanhoPizzaController = async (req, res) => {
+    try{
+        const tamanho = await pizzaService.removeTamanhoPizzaService(req.params.id, req.body);
+        return res.status(200).send(tamanho);
+
+    }catch (err){
+        console.log(`erro: ${err.message}`);
+        return res.status(500).send({ message: "Aconteceu um erro inesperado :( Tente novamente!"});
+    }
+};
+
 module.exports = {
     findPizzaByIdController,
     findAllPizzasController,
     createPizzaController,
     updatePizzaController,
-    removePizzaController
+    removePizzaController,
+    addTamanhoPizzaController,
+    removeTamanhoPizzaController
 }
