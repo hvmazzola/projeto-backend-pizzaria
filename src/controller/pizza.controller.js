@@ -78,7 +78,7 @@ const removePizzaController = async (req, res) => {
 const addTamanhoPizzaController = async (req, res) => {
     try{
         const tamanho = await pizzaService.addTamanhoPizzaService(req.params.id, req.body);
-        return res.status(200).send(tamanho);
+        return res.status(201).send(tamanho);
 
     }catch (err){
         console.log(`erro: ${err.message}`);

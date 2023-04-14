@@ -10,14 +10,13 @@ router.get("/findall", authMiddleware, usuarioController.findAllUsersController)
 // rotas post
 router.post("/create", usuarioController.createUserController);
 router.post("/addAddress/:id", authMiddleware, usuarioController.addUserAddressController);
-router.post("/addFavPizza/:id", authMiddleware, usuarioController.addUserFavPizzaController);
+router.post("/addPedidoPizza/:id", authMiddleware, usuarioController.addUserPedidoController);
 
 // rotas put
 router.put("/update/:id", authMiddleware, usuarioController.updateUserController);
 
 // rotas delete
 router.delete("/remove/:id", authMiddleware, usuarioController.removeUserController);
-router.delete("/removeAddress", authMiddleware, usuarioController.removeUserAddressController);
-router.delete("/removeFavPizza", authMiddleware, usuarioController.removeUserFavPizzaController);
+router.delete("/removeAddress/:id", authMiddleware, usuarioController.removeUserAddressController);
 
 module.exports = router;

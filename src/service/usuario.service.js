@@ -54,10 +54,22 @@ const removeUserAddressService = (id, addressId) => {
     );
 };
 
-const addUserFavPizzaService = (id, pizza) => {
-};
-
-const removeUserFavPizzaService = (pizza) => {
+const addUserPedidoService = (id, pedido) => {
+    return Usuario.findOneAndUpdate(
+        {
+            _id: id,
+        },
+        {
+            $push: {
+                pedidos: {
+                    _id: pedido._id,
+                },
+            },
+        },
+        {
+            rawResult: true,
+        }
+    );
 };
 
 module.exports = {
@@ -68,6 +80,5 @@ module.exports = {
     removeUserService,
     addUserAddressService,
     removeUserAddressService,
-    addUserFavPizzaService,
-    removeUserFavPizzaService    
+    addUserPedidoService
 }

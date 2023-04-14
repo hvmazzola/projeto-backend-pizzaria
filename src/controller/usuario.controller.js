@@ -100,7 +100,7 @@ const addUserAddressController = async (req, res) => {
 
 const removeUserAddressController = async (req, res) => {
     try{
-        const endereco = await userService.removeUserAddressService(req.body.id, req.body.addressId);
+        const endereco = await userService.removeUserAddressService(req.params.id, req.body.addressId);
         let found = false;
 
         endereco.value.enderecos.map((valor, chave) => {
@@ -121,19 +121,10 @@ const removeUserAddressController = async (req, res) => {
     }
 };
 
-const addUserFavPizzaController = async (req, res) => {
+const addUserPedidoController = async (req, res) => {
     try{
-
-
-    }catch (err){
-        console.log(`erro: ${err.message}`);
-        return res.status(500).send({ message: "Aconteceu um erro inesperado :( Tente novamente!"});
-    }
-};
-
-const removeUserFavPizzaController = async (req, res) => {
-    try{
-
+        const pedido = await userService.addUserPedidoService(req.params.id, req.body);
+        return res.status(201).send(pedido);
 
     }catch (err){
         console.log(`erro: ${err.message}`);
@@ -149,6 +140,5 @@ module.exports = {
     removeUserController,
     addUserAddressController,
     removeUserAddressController,
-    addUserFavPizzaController,
-    removeUserFavPizzaController    
+    addUserPedidoController
 }

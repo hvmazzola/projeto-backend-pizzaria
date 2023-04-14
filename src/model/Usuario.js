@@ -18,10 +18,10 @@ const UsuarioSchema = new mongoose.Schema({
             createdAt: { type: Date, required: true, default: Date.now() }
         }
     ],
-    pizzas_fav: [
+    pedidos: [
         {
-            _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, ref: "pizzas"},
-            createdAt: { type: Date, required: true}
+            _id: { type: mongoose.Schema.Types.ObjectId, unique: true, ref: "pedidos"},
+            createdAt: { type: Date, required: true, default: Date.now() }
         }
     ],
     admin: { type: Boolean, required: true, default: false },

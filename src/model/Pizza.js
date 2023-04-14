@@ -15,6 +15,7 @@ const PizzaSchema = new mongoose.Schema({
     saborBorda: { type: String, required: true , default: "Sem borda" },
     valorAdicionalBorda: { type: Number, required: true, default: 0 },
     valorTotal: { type: Number, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "usuarios" },
     createdAt: { type: Date, required: true, default: Date.now() },
 });
 

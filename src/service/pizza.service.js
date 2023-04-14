@@ -23,13 +23,12 @@ const removePizzaService = (id) => {
 const addTamanhoPizzaService = (id, tamanho) => {
     return Pizza.findOneAndUpdate(
         {
-            _id: id
+            _id: id,
         },
         {
             $push: {
                 tamanho: {
                     _id: tamanho._id,
-                    createdAt: tamanho.createdAt
                 },
             },
         },
