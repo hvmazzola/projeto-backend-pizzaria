@@ -1,4 +1,4 @@
-const express = require("express");carrinho
+const express = require("express");
 const router = express.Router();
 const carrinhoController = require("../controller/carrinho.controller");
 const authMiddleware = require("../middleware/auth.middleware");
