@@ -18,14 +18,14 @@ const UsuarioSchema = new mongoose.Schema({
             createdAt: { type: Date, required: true, default: Date.now() }
         }
     ],
-    createdAt: { type: Date, required: true, default: Date.now() },
     pizzas_fav: [
         {
             _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, ref: "pizzas"},
             createdAt: { type: Date, required: true}
         }
     ],
-    admin: { type: Boolean, required: true, default: false }
+    admin: { type: Boolean, required: true, default: false },
+    createdAt: { type: Date, required: true, default: Date.now() },
 });
 
 UsuarioSchema.pre("save", async function(next) {

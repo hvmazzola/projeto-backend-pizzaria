@@ -6,6 +6,7 @@ const TamanhoSchema = new mongoose.Schema({
     qntSabores: { type: Number, required: true },
     valorBase: { type: Number, unique: true, required: true },
     bordaGratuita: { type: Boolean, required: true },
+    createdAt: { type: Date, required: true, default: Date.now() },
 });
 
 const Tamanho = mongoose.model("tamanhos", TamanhoSchema);

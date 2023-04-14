@@ -36,8 +36,7 @@ const createPizzaController = async (req, res) => {
     try{
         const body = {
             ...req.body,
-            userId: req.userId,
-            createdAt: new Date(),
+            userId: req.userId
         }
 
         return res.status(201).send(await pizzaService.createPizzaService(body));
@@ -78,7 +77,6 @@ const removePizzaController = async (req, res) => {
 
 const addTamanhoPizzaController = async (req, res) => {
     try{
-        req.body.createdAt = new Date();
         const tamanho = await pizzaService.addTamanhoPizzaService(req.params.id, req.body);
         return res.status(200).send(tamanho);
 

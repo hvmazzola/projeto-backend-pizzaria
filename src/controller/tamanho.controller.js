@@ -36,8 +36,7 @@ const createTamanhoController = async (req, res) => {
     try{
         const body = {
             ...req.body,
-            userId: req.userId,
-            createdAt: new Date(),
+            userId: req.userId
         }
 
         return res.status(201).send(await tamanhoService.createTamanhoService(body));
