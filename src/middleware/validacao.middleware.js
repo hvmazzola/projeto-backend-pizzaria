@@ -1,15 +1,15 @@
 const validaUsuario = (req, res, next) => {
     let erros = [];
 
-    if(!req.body.nome){
+    if(req.body.nome == null){
         erros.push("nome");
     }
 
-    if(!req.body.email){
+    if(req.body.email == null){
         erros.push("email");
     }
 
-    if(!req.body.senha){
+    if(req.body.senha == null){
         erros.push("senha");
     }
 
@@ -25,11 +25,11 @@ const validaUsuario = (req, res, next) => {
 const validaPizza = (req, res, next) => {
     let erros = [];
 
-    if(!req.body.valorTotal){
+    if(req.body.valorTotal == null){
         erros.push("valorTotal");
     }
 
-    if(!req.body.tamanho._id){
+    if(req.body.tamanho._id == null){
         erros.push("tamanho._id");
     }
 
@@ -45,23 +45,23 @@ const validaPizza = (req, res, next) => {
 const validaTamanho = (req, res, next) => {
     let erros = [];
 
-    if(!req.body.nome){
+    if(req.body.nome == null){
         erros.push("nome");
     }
 
-    if(!req.body.diametro){
+    if(req.body.diametro == null){
         erros.push("diametro");
     }
 
-    if(!req.body.qntSabores){
+    if(req.body.qntSabores == null){
         erros.push("qntSabores");
     }
     
-    if(!req.body.valorBase){
+    if(req.body.valorBase == undefined){
         erros.push("valorBase");
     }
 
-    if(!req.body.bordaGratuita){
+    if(req.body.bordaGratuita == null){
         erros.push("bordaGratuita");
     }
 
@@ -77,11 +77,11 @@ const validaTamanho = (req, res, next) => {
 const validaSabor = (req, res, next) => {
     let erros = [];
 
-    if(!req.body.nome){
+    if(req.body.nome == null){
         erros.push("nome");
     }
 
-    if(!req.body.valorAdicional){
+    if(req.body.valorAdicional == null){
         erros.push("valorAdicional");
     }
 
@@ -94,9 +94,35 @@ const validaSabor = (req, res, next) => {
     };
 };
 
+const validaPedido = (req, res, next) => {
+
+    if(req.body.pizzas == null){
+        return res.status(400).send({ message: `Não é possível criar um pedido sem pizzas. Tente novamente!`});;
+    }
+
+    if(req.body.precoTotal == null){
+        return res.status(400).send({ message: `O campo "precoTotal" precisa ser preenchido. Tente novamente!`});
+    }
+    
+    return next();
+    
+};
+
+const validaCarrinho = (req, res, next) => {
+
+    if(req.body.precoTota == null){
+        return res.status(400).send({ message: `O campo "precoTotal" precisa ser preenchido. Tente novamente!`});
+    }
+    
+    return next();
+    
+};
+
 module.exports = {
     validaUsuario,
     validaPizza,
     validaTamanho,
-    validaSabor
+    validaSabor,
+    validaPedido,
+    validaCarrinho
 };
