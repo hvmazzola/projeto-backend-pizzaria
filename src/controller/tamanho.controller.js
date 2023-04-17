@@ -64,7 +64,7 @@ const removeTamanhoController = async (req, res) => {
         const deletedTamanho = await tamanhoService.removeTamanhoService(req.params.id);
 
         if(deletedTamanho == null){
-            return res.status(400).send({ message: "Usuário não encontrado. Tente novamente." });
+            return res.status(400).send({ message: "Tamanho não encontrado. Tente novamente." });
         } else {
             return res.status(200).send({ message: "Sucesso! Tamanho deletado." });            
         };

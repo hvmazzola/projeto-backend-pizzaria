@@ -9,7 +9,7 @@ const CarrinhoSchema = new mongoose.Schema({
         },
     ],
     precoTotal: { type: Number, required: true},
-    frete: { type: Number, required: true, default: 0},
+    entrega: { type: Number, required: true, default: 0},
     userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "usuarios" },
     createdAt: { type: Date, required: true, default: Date.now() },
 });

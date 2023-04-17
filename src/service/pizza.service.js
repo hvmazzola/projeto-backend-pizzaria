@@ -20,15 +20,16 @@ const removePizzaService = (id) => {
     return Pizza.findByIdAndRemove(id);
 };
 
-const addTamanhoPizzaService = (id, tamanho) => {
+const addSaborPizzaService = (id, sabor) => {
     return Pizza.findOneAndUpdate(
         {
             _id: id,
         },
         {
             $push: {
-                tamanho: {
-                    _id: tamanho._id,
+                sabores: {
+                    _id: sabor._id,
+                    valorAdicional: sabor.valorAdicional,
                 },
             },
         },
@@ -38,15 +39,16 @@ const addTamanhoPizzaService = (id, tamanho) => {
     );
 };
 
-const removeTamanhoPizzaService = (id, tamanho) => {
+const removeSaborPizzaService = (id, sabor) => {
     return Pizza.findOneAndUpdate(
         {
             _id: id,
         },
         {
             $pull: {
-                tamanho: {
-                    _id: tamanho._id,
+                sabores: {
+                    _id: sabor._id,
+                    valorAdicional: sabor.valorAdicional,
                 },
             },
         },
@@ -62,6 +64,6 @@ module.exports = {
     createPizzaService,
     updatePizzaService,
     removePizzaService,
-    addTamanhoPizzaService,
-    removeTamanhoPizzaService
+    addSaborPizzaService,
+    removeSaborPizzaService
 }

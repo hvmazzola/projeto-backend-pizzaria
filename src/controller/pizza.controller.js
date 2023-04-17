@@ -64,7 +64,7 @@ const removePizzaController = async (req, res) => {
         const deletedPizza = await pizzaService.removePizzaService(req.params.id);
 
         if(deletedPizza == null){
-            return res.status(400).send({ message: "Usuário não encontrado. Tente novamente." });
+            return res.status(400).send({ message: "Pizza não encontrada. Tente novamente." });
         } else {
             return res.status(200).send({ message: "Sucesso! Usuário deletado." });            
         };
@@ -75,10 +75,10 @@ const removePizzaController = async (req, res) => {
     }
 };
 
-const addTamanhoPizzaController = async (req, res) => {
+const addSaborPizzaController = async (req, res) => {
     try{
-        const tamanho = await pizzaService.addTamanhoPizzaService(req.params.id, req.body);
-        return res.status(201).send(tamanho);
+        const sabor = await pizzaService.addSaborPizzaService(req.params.id, req.body);
+        return res.status(201).send(sabor);
 
     }catch (err){
         console.log(`erro: ${err.message}`);
@@ -86,10 +86,10 @@ const addTamanhoPizzaController = async (req, res) => {
     }
 };
 
-const removeTamanhoPizzaController = async (req, res) => {
+const removeSaborPizzaController = async (req, res) => {
     try{
-        const tamanho = await pizzaService.removeTamanhoPizzaService(req.params.id, req.body);
-        return res.status(200).send(tamanho);
+        const sabor = await pizzaService.removeSaborPizzaService(req.params.id, req.body);
+        return res.status(200).send(sabor);
 
     }catch (err){
         console.log(`erro: ${err.message}`);
@@ -103,6 +103,6 @@ module.exports = {
     createPizzaController,
     updatePizzaController,
     removePizzaController,
-    addTamanhoPizzaController,
-    removeTamanhoPizzaController
+    addSaborPizzaController,
+    removeSaborPizzaController
 }

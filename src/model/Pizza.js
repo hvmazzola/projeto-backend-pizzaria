@@ -8,6 +8,7 @@ const PizzaSchema = new mongoose.Schema({
     sabores: [
         { 
             _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, ref: "sabores"},
+            valorAdicional: { type: mongoose.Schema.Types.Number, required: true, ref: "sabores"},
             createdAt: { type: Date, required: true, default: Date.now() },
         }
     ],

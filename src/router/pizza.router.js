@@ -9,13 +9,13 @@ router.get("/findall", authMiddleware, pizzaController.findAllPizzasController);
 
 // rotas post
 router.post("/create", authMiddleware, pizzaController.createPizzaController);
-router.post("/addTamanho/:id", authMiddleware, pizzaController.addTamanhoPizzaController);
+router.post("/addSabor/:id", authMiddleware, pizzaController.addSaborPizzaController);
 
 // rotas put
 router.put("/update/:id", authMiddleware, pizzaController.updatePizzaController);
 
 // rotas delete
 router.delete("/remove/:id", authMiddleware, pizzaController.removePizzaController);
-router.delete("/removeTamanho/:id", authMiddleware, pizzaController.removeTamanhoPizzaController);
+router.delete("/removeSabor/:id", authMiddleware, pizzaController.removeSaborPizzaController);
 
 module.exports = router;

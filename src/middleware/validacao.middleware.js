@@ -7,4 +7,6 @@ const validaUsuario = (req, res, next) => {
     return next();
 };
 
-module.exports = validaUsuario;
+module.exports = {
+    validaUsuario
+};
