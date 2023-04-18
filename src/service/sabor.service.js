@@ -4,8 +4,8 @@ const findSaborByIdService = (id) => {
     return Sabor.findById(id);
 };
 
-const findAllSaboresService = () => {
-    return Sabor.find();
+const findAllSaboresService = (limit, offset) => {
+    return Sabor.find().limit(limit).skip(offset);
 };
 
 const createSaborService = (body) => {

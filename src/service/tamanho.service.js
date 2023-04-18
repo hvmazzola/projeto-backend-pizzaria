@@ -4,8 +4,8 @@ const findTamanhoByIdService = (id) => {
     return Tamanho.findById(id);
 };
 
-const findAllTamanhosService = () => {
-    return Tamanho.find();
+const findAllTamanhosService = (limit, offset) => {
+    return Tamanho.find().limit(limit).skip(offset);
 };
 
 const createTamanhoService = (body) => {

@@ -25,7 +25,7 @@ const findSaborByIdController = async (req, res) => {
 
 const findAllSaboresController = async (req, res) => {
     try{
-        return res.status(200).send(await saborService.findAllSaboresService());
+        return res.status(200).send(await saborService.findAllSaboresService(req.query.limit, req.query.offset));
     }catch (err){
         console.log(`erro: ${err.message}`);
         return res.status(500).send({ message: "Aconteceu um erro inesperado :( Tente novamente!"});

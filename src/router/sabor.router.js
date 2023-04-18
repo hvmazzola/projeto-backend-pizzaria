@@ -3,10 +3,11 @@ const router = express.Router();
 const saborController = require("../controller/sabor.controller");
 const authMiddleware = require("../middleware/auth.middleware");
 const { validaId, validaSabor } = require("../middleware/validacao.middleware");
+const paginacao = require("../middleware/paginacao.middleware");
 
 // rotas get
 router.get("/findById/:id", authMiddleware, validaId, saborController.findSaborByIdController);
-router.get("/findall", authMiddleware, saborController.findAllSaboresController);
+router.get("/findall", authMiddleware, paginacao, saborController.findAllSaboresController);
 
 // rotas post
 router.post("/create", authMiddleware, validaSabor, saborController.createSaborController);

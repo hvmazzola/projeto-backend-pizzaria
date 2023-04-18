@@ -25,7 +25,7 @@ const findPizzaByIdController = async (req, res) => {
 
 const findAllPizzasController = async (req, res) => {
     try{
-        return res.status(200).send(await pizzaService.findAllPizzasService());
+        return res.status(200).send(await pizzaService.findAllPizzasService(req.query.limit, req.query.offset));
     }catch (err){
         console.log(`erro: ${err.message}`);
         return res.status(500).send({ message: "Aconteceu um erro inesperado :( Tente novamente!"});
