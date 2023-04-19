@@ -1,4 +1,5 @@
 const carrinhoService = require("../service/carrinho.service");
+const pizzaService = require("../service/pizza.service");
 
 
 const findCarrinhoByIdController = async (req, res) => {
@@ -80,10 +81,66 @@ const removeCarrinhoController = async (req, res) => {
     }
 };
 
+const addPizzaCarrinhoController = async (req, res) => {
+    try{
+        const carrinho = await carrinhoService.findCarrinhoByIdService(req.params.id);
+
+        if(!carrinho){
+            return res.status(404).send({ message: "Carrinho não encontrado. Tente novamente."});
+        }
+
+        let pizza = await pizzaService.findPizzaByIdService(req.body._id);
+
+        if(!pizza){
+            return res.status(404).send({ message: "Pizza não encontrada. Tente novamente."});
+        }
+
+        pizza = await carrinhoService.addPizzaCarrinhoService(req.params.id, req.body);
+
+        return res.status(200).send({ message: "Pizza adicionada com sucesso!" });
+
+    }catch (err){
+        console.log(`erro: ${err.message}`);
+        return res.status(500).send({ message: "Aconteceu um erro inesperado :( Tente novamente!"});
+    }
+};
+
+const removePizzaCarrinhoController = async (req, res) => {
+    try{
+        const carrinho = await carrinhoService.findCarrinhoByIdService(req.params.id);
+
+        if(!carrinho){
+            return res.status(404).send({ message: "Carrinho não encontrada. Tente novamente."});
+        }
+
+        const pizza = await carrinhoService.removePizzaCarrinhoService(req.params.id, req.body);
+
+        let found = false;
+
+        pizza.value.pizzas.map((valor, chave) => {
+            if(valor._id == req.body._id){
+                found = true;
+            }
+        });
+
+        if(found){
+            return res.status(200).send({ message: "Pizza removida com sucesso!" });
+        } else {
+            return res.status(400).send({ message: "Pizza não encontrada. Tente novamente." });
+        };
+
+    }catch (err){
+        console.log(`erro: ${err.message}`);
+        return res.status(500).send({ message: "Aconteceu um erro inesperado :( Tente novamente!"});
+    }
+};
+
 module.exports = {
     findCarrinhoByIdController,
     findAllCarrinhosController,
     createCarrinhoController,
     updateCarrinhoController,
-    removeCarrinhoController
+    removeCarrinhoController,
+    addPizzaCarrinhoController,
+    removePizzaCarrinhoController
 }

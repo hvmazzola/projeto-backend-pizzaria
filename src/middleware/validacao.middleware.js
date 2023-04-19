@@ -85,28 +85,12 @@ const validaPizza = (req, res, next) => {
 };
 
 const validaSaboresPizza = (req, res, next) => {
-    let erros = [];
 
+    if(req.body._id == null){
+        return res.status(400).send({ message: "O campo '_id' precisa ser preenchido. Tente novamente!"});
+    }
     
-        if(req.body._id == null){
-            erros.push(`'ID - VAZIO'`);
-        };
-
-        if(req.body.valorAdicional == null){
-            erros.push(`'Valor Adicional - VAZIO'`);
-        };
-
-        if(!objectId.isValid(req.body._id)){
-            erros.push(`'ID - INVÁLIDO'`);
-        };
-
-    if(erros.length == 0) {
-        return next();
-    } else if(erros.length == 1) {
-        return res.status(400).send({ message: `Erro no campo ${erros}. Tente novamente!`});
-    } else {
-        return res.status(400).send({ message: `Erro nos campos ${erros}. Tente novamente!`});
-    };
+    return next();
 };
 
 const validaTamanho = (req, res, next) => {
@@ -177,8 +161,27 @@ const validaPedido = (req, res, next) => {
 
 const validaCarrinho = (req, res, next) => {
 
-    if(req.body.precoTota == null){
-        return res.status(400).send({ message: `O campo "precoTotal" precisa ser preenchido. Tente novamente!`});
+    if(req.body.precoTotal == null){
+        return res.status(400).send({ message: "O campo 'precoTotal' precisa ser preenchido. Tente novamente!"});
+    }
+    
+    return next();
+};
+
+const validaAddPedido = (req, res, next) => {
+
+    if(req.body._id == null){
+        return res.status(400).send({ message: "O campo '_id' precisa ser preenchido. Tente novamente!"});
+    }
+    
+    return next();
+    
+};
+
+const validaAddPizza = (req, res, next) => {
+
+    if(req.body._id == null){
+        return res.status(400).send({ message: "O campo '_id' precisa ser preenchido. Tente novamente!"});
     }
     
     return next();
@@ -198,7 +201,7 @@ const validaIdBody = (req, res, next) => {
     if(objectId.isValid(req.body._id)){
         return next();
     }else{
-        return res.status(400).send({ message: `O ID que foi passado não corresponde aos podrões necessários. Tente novamente!`});
+        return res.status(400).send({ message: `O ID que foi passado não corresponde aos padrões necessários. Tente novamente!`});
     }    
 };
 
@@ -268,6 +271,8 @@ module.exports = {
     validaSabor,
     validaPedido,
     validaCarrinho,
+    validaAddPedido,
+    validaAddPizza,
     validaIdParams,
     validaIdBody,
     validaLogin,

@@ -29,7 +29,6 @@ const addSaborPizzaService = (id, sabor) => {
             $push: {
                 sabores:{
                     _id: sabor._id,
-                    valorAdicional: sabor.valorAdicional,
                 },
             },
         },
@@ -48,7 +47,6 @@ const removeSaborPizzaService = (id, sabor) => {
             $pull: {
                 sabores: {
                     _id: sabor._id,
-                    valorAdicional: sabor.valorAdicional,
                 },
             },
         },

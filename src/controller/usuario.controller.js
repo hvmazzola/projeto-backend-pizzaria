@@ -1,4 +1,5 @@
 const userService = require("../service/usuario.service");
+const pedidoService = require("../service/pedido.service");
 
 
 const findUserByIdController = async (req, res) => {
@@ -116,8 +117,21 @@ const removeUserAddressController = async (req, res) => {
 
 const addUserPedidoController = async (req, res) => {
     try{
-        const pedido = await userService.addUserPedidoService(req.params.id, req.body);
-        return res.status(201).send(pedido);
+        const usuario = await userService.findUserByIdService(req.params.id);
+
+        if(!usuario){
+            return res.status(404).send({ message: "Usuário não encontrado. Tente novamente."});
+        }
+
+        let pedido = await pedidoService.findPedidoByIdService(req.body._id);
+
+        if(!pedido){
+            return res.status(404).send({ message: "Pedido não encontrado. Tente novamente."});
+        }
+
+        pedido = await userService.addUserPedidoService(req.params.id, req.body);
+
+        return res.status(200).send({ message: "Pedido adicionado com sucesso!" });
 
     }catch (err){
         console.log(`erro: ${err.message}`);

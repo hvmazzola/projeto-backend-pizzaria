@@ -89,7 +89,7 @@ const addSaborPizzaController = async (req, res) => {
             return res.status(404).send({ message: "Pizza não encontrada. Tente novamente."});
         }
 
-        let sabor = await saborService.findSaborByIdService(req.params.id);
+        let sabor = await saborService.findSaborByIdService(req.body._id);
 
         if(!sabor){
             return res.status(404).send({ message: "Sabor não encontrado. Tente novamente."});
