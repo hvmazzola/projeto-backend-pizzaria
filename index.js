@@ -8,6 +8,7 @@ const sabor = require("./src/router/sabor.router"); // arquivo de rotas dos sabo
 const pizza = require("./src/router/pizza.router"); // arquivo de rotas das pizzas
 const carrinho = require("./src/router/carrinho.router"); // arquivo de rotas do carrinho
 const pedido = require("./src/router/pedido.router"); // arquivo de rotas do pedido
+const docs = require("./src/router/docs.router"); // arquivo de rotas do swagger docs
 
 
 
@@ -26,6 +27,7 @@ app.use("/sabor", sabor); // chamando rotas dos sabores
 app.use("/pizza", pizza); // chamando rotas das pizzas
 app.use("/carrinho", carrinho); // chamando rotas do carrinho
 app.use("/pedido", pedido); // chamando rotas do pedido
+app.use("/docs", docs); // chamando rotas do swagger docs
 
 app.get ("/", (req, res) => {
     res.send({

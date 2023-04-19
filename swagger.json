@@ -1,0 +1,103 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+            "title": "API Pizzaria",
+            "description": "API construída para conter todas as funcionalidades pertinentes à uma jornada do cliente de uma pizzaria.",
+            "contact": {
+                "name": "Henrique Mazzola",
+                "email": "henriquemazzola31@gmail.com"
+            },
+            "version": "1.0.0"
+        },
+    "servers": [
+        {
+            "url": "http://localhost:3000/",
+            "description": "API de teste LOCAL"
+        }
+    ],
+    "paths": {
+        "usuario/findAll": {
+            "get": {
+                "summary": "Lista todos os usuários da API",
+                "description": "Rota responsável pela listagem de usuários da API, com paginação, incluindo usuários administradores.",
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "description": "OK: Tarefa realizada com sucesso."
+                    },
+                    "401": {
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token."
+                    },
+                    "404": {
+                        "description": "NOT FOUND: Nenhum usuário encontrado."
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação."
+                    }
+                }
+            }
+        },
+        "usuario/findById/:id":{
+            "get": {
+                "summary": "Lista um usuário a partir do seu ID",
+                "description": "Rota responsável pela procura de um único usuário a partir do ID colocado como parâmetro na requisição.",
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "description": "OK: Tarefa realizada com sucesso."
+                    },
+                    "401": {
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token."
+                    },
+                    "404": {
+                        "description": "NOT FOUND: Usuário não encontrado."
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação."
+                    }
+                }
+            }
+        },
+        "usuario/remove/:id":{},
+        "usuario/update/:id":{},
+        "usuario/create":{},
+        "usuario/addAddress/:id":{},
+        "usuario/removeAddress/:id":{},
+        "usuario/addPedido/:id":{},
+
+        "pizza/findAll":{},
+        "pizza/findById/:id":{},
+        "pizza/remove/:id":{},
+        "pizza/update/:id":{},
+        "pizza/create":{},
+        "pizza/addSabor/:id":{},
+        "pizza/removeSabor/:id":{},
+
+        "tamanho/findAll":{},
+        "tamanho/findById/:id":{},
+        "tamanho/remove/:id":{},
+        "tamanho/update/:id":{},
+        "tamanho/create":{},
+
+        "sabor/findAll":{},
+        "sabor/findById/:id":{},
+        "sabor/remove/:id":{},
+        "sabor/update/:id":{},
+        "sabor/create":{},
+
+        "carrinho/findAll":{},
+        "carrinho/findById/:id":{},
+        "carrinho/remove/:id":{},
+        "carrinho/update/:id":{},
+        "carrinho/create":{},
+        "carrinho/addPizza/:id":{},
+        "carrinho/removePizza/:id":{},
+        
+        "pedido/findAll":{},
+        "pedido/findById/:id":{},
+        "pedido/remove/:id":{},
+        "pedido/updateStatus/:id":{},
+        "pedido/cancelStatus/:id":{},
+        "pedido/create":{}
+        }
+}
