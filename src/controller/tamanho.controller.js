@@ -49,6 +49,11 @@ const createTamanhoController = async (req, res) => {
 
 const updateTamanhoController = async (req, res) => {
     try{
+        const tamanho = await tamanhoService.findTamanhoByIdService(req.params.id);
+
+        if(!tamanho){
+            return res.status(404).send({ message: "Tamanho não encontrada. Tente novamente."});
+        }
         
         return res.status(200).send(await tamanhoService.updateTamanhoService(req.params.id, req.body));
 

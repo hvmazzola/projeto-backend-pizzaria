@@ -66,6 +66,13 @@ const removePedidoController = async (req, res) => {
 
 const updateStatusPedidoController = async (req, res) => {
     try{
+
+        const pedido = await pedidoService.findPedidoByIdService(req.params.id);
+
+        if(!pedido){
+            return res.status(404).send({ message: "Pedido não encontrado. Tente novamente."});
+        }
+
         return res.status(200).send(await pedidoService.updateStatusPedidoService(req.params.id));
 
     }catch (err){
@@ -76,6 +83,12 @@ const updateStatusPedidoController = async (req, res) => {
 
 const cancelStatusPedidoController = async (req, res) => {
     try{
+        const pedido = await pedidoService.findPedidoByIdService(req.params.id);
+
+        if(!pedido){
+            return res.status(404).send({ message: "Pedido não encontrado. Tente novamente."});
+        }
+
         return res.status(200).send(await pedidoService.cancelStatusPedidoService(req.params.id));
 
     }catch (err){

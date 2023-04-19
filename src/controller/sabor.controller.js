@@ -49,6 +49,11 @@ const createSaborController = async (req, res) => {
 
 const updateSaborController = async (req, res) => {
     try{
+        const sabor = await saborService.findSaborByIdService(req.params.id);
+
+        if(!sabor){
+            return res.status(404).send({ message: "Sabor não encontrada. Tente novamente."});
+        }
         
         return res.status(200).send(await saborService.updateSaborService(req.params.id, req.body));
 

@@ -49,7 +49,12 @@ const createCarrinhoController = async (req, res) => {
 
 const updateCarrinhoController = async (req, res) => {
     try{
+        const carrinho = await carrinhoService.findCarrinhoByIdService(req.params.id);
 
+        if(!carrinho){
+            return res.status(404).send({ message: "Carrinho não encontrado. Tente novamente."});
+        }
+        
         return res.status(200).send(await carrinhoService.updateCarrinhoService(req.params.id, req.body));
 
     }catch (err){

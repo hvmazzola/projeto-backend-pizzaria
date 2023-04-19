@@ -1,4 +1,5 @@
 const pizzaService = require("../service/pizza.service");
+const saborService = require("../service/sabor.service");
 
 
 const findPizzaByIdController = async (req, res) => {
@@ -49,6 +50,11 @@ const createPizzaController = async (req, res) => {
 
 const updatePizzaController = async (req, res) => {
     try{
+        const pizza = await pizzaService.findPizzaByIdService(req.params.id);
+
+        if(!pizza){
+            return res.status(404).send({ message: "Pizza não encontrada. Tente novamente."});
+        }
 
         return res.status(200).send(await pizzaService.updatePizzaService(req.params.id, req.body));
 
@@ -77,8 +83,21 @@ const removePizzaController = async (req, res) => {
 
 const addSaborPizzaController = async (req, res) => {
     try{
-        const sabor = await pizzaService.addSaborPizzaService(req.params.id, req.body);
-        return res.status(201).send(sabor);
+        const pizza = await pizzaService.findPizzaByIdService(req.params.id);
+
+        if(!pizza){
+            return res.status(404).send({ message: "Pizza não encontrada. Tente novamente."});
+        }
+
+        let sabor = await saborService.findSaborByIdService(req.params.id);
+
+        if(!sabor){
+            return res.status(404).send({ message: "Sabor não encontrado. Tente novamente."});
+        }
+
+        sabor = await pizzaService.addSaborPizzaService(req.params.id, req.body);
+
+        return res.status(200).send({ message: "Sabor adicionado com sucesso!" });
 
     }catch (err){
         console.log(`erro: ${err.message}`);
@@ -88,8 +107,27 @@ const addSaborPizzaController = async (req, res) => {
 
 const removeSaborPizzaController = async (req, res) => {
     try{
+        const pizza = await pizzaService.findPizzaByIdService(req.params.id);
+
+        if(!pizza){
+            return res.status(404).send({ message: "Pizza não encontrada. Tente novamente."});
+        }
+
         const sabor = await pizzaService.removeSaborPizzaService(req.params.id, req.body);
-        return res.status(200).send(sabor);
+
+        let found = false;
+
+        sabor.value.sabores.map((valor, chave) => {
+            if(valor._id == req.body._id){
+                found = true;
+            }
+        });
+
+        if(found){
+            return res.status(200).send({ message: "Sabor removido com sucesso!" });
+        } else {
+            return res.status(400).send({ message: "Sabor não encontrado. Tente novamente." });
+        };
 
     }catch (err){
         console.log(`erro: ${err.message}`);

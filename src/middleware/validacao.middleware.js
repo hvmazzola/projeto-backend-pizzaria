@@ -87,24 +87,25 @@ const validaPizza = (req, res, next) => {
 const validaSaboresPizza = (req, res, next) => {
     let erros = [];
 
-    req.body.map((value, key) => {
-        if(value._id == null){
-            erros.push(`'${key+1} - ID'`);
-        }
-
-        if(value.valorAdicional == null){
-            erros.push(`'${key+1} - Valor Adicional'`);
-        }
-    });
-
     
+        if(req.body._id == null){
+            erros.push(`'ID - VAZIO'`);
+        };
+
+        if(req.body.valorAdicional == null){
+            erros.push(`'Valor Adicional - VAZIO'`);
+        };
+
+        if(!objectId.isValid(req.body._id)){
+            erros.push(`'ID - INVÁLIDO'`);
+        };
 
     if(erros.length == 0) {
         return next();
     } else if(erros.length == 1) {
-        return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido. Tente novamente!`});
+        return res.status(400).send({ message: `Erro no campo ${erros}. Tente novamente!`});
     } else {
-        return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos. Tente novamente!`});
+        return res.status(400).send({ message: `Erro nos campos ${erros}. Tente novamente!`});
     };
 };
 
@@ -185,7 +186,6 @@ const validaCarrinho = (req, res, next) => {
 };
 
 const validaIdParams = (req, res, next) => {
-
     if(objectId.isValid(req.params.id)){
         return next();
     }else{
