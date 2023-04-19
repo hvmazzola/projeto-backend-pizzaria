@@ -16,28 +16,80 @@
         }
     ],
     "paths": {
-        "usuario/findAll": {
+        "/usuario/findAll": {
             "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "summary": "Lista todos os usuários da API",
                 "description": "Rota responsável pela listagem de usuários da API, com paginação, incluindo usuários administradores.",
                 "tags": ["User"],
                 "responses": {
                     "200": {
-                        "description": "OK: Tarefa realizada com sucesso."
+                        "description": "OK: Tarefa realizada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Usuario"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token."
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "NOT FOUND: Nenhum usuário encontrado."
+                        "description": "NOT FOUND: Nenhum usuário encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação."
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
-        "usuario/findById/:id":{
+        "/usuario/findById/:id":{
             "get": {
                 "summary": "Lista um usuário a partir do seu ID",
                 "description": "Rota responsável pela procura de um único usuário a partir do ID colocado como parâmetro na requisição.",
@@ -58,46 +110,121 @@
                 }
             }
         },
-        "usuario/remove/:id":{},
-        "usuario/update/:id":{},
-        "usuario/create":{},
-        "usuario/addAddress/:id":{},
-        "usuario/removeAddress/:id":{},
-        "usuario/addPedido/:id":{},
+        "/usuario/remove/:id":{},
+        "/usuario/upstring/:id":{},
+        "/usuario/create":{},
+        "/usuario/addAddress/:id":{},
+        "/usuario/removeAddress/:id":{},
+        "/usuario/addPedido/:id":{},
 
-        "pizza/findAll":{},
-        "pizza/findById/:id":{},
-        "pizza/remove/:id":{},
-        "pizza/update/:id":{},
-        "pizza/create":{},
-        "pizza/addSabor/:id":{},
-        "pizza/removeSabor/:id":{},
+        "/pizza/findAll":{},
+        "/pizza/findById/:id":{},
+        "/pizza/remove/:id":{},
+        "/pizza/upstring/:id":{},
+        "/pizza/create":{},
+        "/pizza/addSabor/:id":{},
+        "/pizza/removeSabor/:id":{},
 
-        "tamanho/findAll":{},
-        "tamanho/findById/:id":{},
-        "tamanho/remove/:id":{},
-        "tamanho/update/:id":{},
-        "tamanho/create":{},
+        "/tamanho/findAll":{},
+        "/tamanho/findById/:id":{},
+        "/tamanho/remove/:id":{},
+        "/tamanho/upstring/:id":{},
+        "/tamanho/create":{},
 
-        "sabor/findAll":{},
-        "sabor/findById/:id":{},
-        "sabor/remove/:id":{},
-        "sabor/update/:id":{},
-        "sabor/create":{},
+        "/sabor/findAll":{},
+        "/sabor/findById/:id":{},
+        "/sabor/remove/:id":{},
+        "/sabor/upstring/:id":{},
+        "/sabor/create":{},
 
-        "carrinho/findAll":{},
-        "carrinho/findById/:id":{},
-        "carrinho/remove/:id":{},
-        "carrinho/update/:id":{},
-        "carrinho/create":{},
-        "carrinho/addPizza/:id":{},
-        "carrinho/removePizza/:id":{},
+        "/carrinho/findAll":{},
+        "/carrinho/findById/:id":{},
+        "/carrinho/remove/:id":{},
+        "/carrinho/upstring/:id":{},
+        "/carrinho/create":{},
+        "/carrinho/addPizza/:id":{},
+        "/carrinho/removePizza/:id":{},
         
-        "pedido/findAll":{},
-        "pedido/findById/:id":{},
-        "pedido/remove/:id":{},
-        "pedido/updateStatus/:id":{},
-        "pedido/cancelStatus/:id":{},
-        "pedido/create":{}
+        "/pedido/findAll":{},
+        "/pedido/findById/:id":{},
+        "/pedido/remove/:id":{},
+        "/pedido/upstringStatus/:id":{},
+        "/pedido/cancelStatus/:id":{},
+        "/pedido/create":{}
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "Usuario": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    },
+                    "imagem": {
+                        "type": "string"
+                    },
+                    "enderecos": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "logradouro": {
+                                    "type": "string"
+                                },
+                                "numero": {
+                                    "type": "number"
+                                },
+                                "bairro": {
+                                    "type": "string"
+                                },
+                                "cidade": {
+                                    "type": "string"
+                                },"uf": {
+                                    "type": "string"
+                                },
+                                "complemento": {
+                                    "type": "string"
+                                },
+                                "cep": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "pedidos": {
+                        "type": "array",
+                        "properties": {
+                            "_id": {
+                                "type": "string"
+                            },
+                            "createdAt": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "admin": {
+                        "type": "boolean"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                }
+            }
         }
+    }
 }
