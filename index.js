@@ -1,5 +1,7 @@
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
+
 const connectToDatabase = require("./src/database/database"); // arquivo de conexão com o banco
 const usuario = require("./src/router/usuario.router"); // arquivo de rotas do usuário
 const auth = require("./src/router/auth.router"); // arquivo de rotas de autenticação
@@ -17,6 +19,21 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors(
+    {
+        origin: [
+            "localhost:3001",
+            "localhost:3002",
+        ],
+        methods: [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+        ]
+    }
+));
 
 connectToDatabase(); // conectanco com o banco
 
