@@ -26,6 +26,22 @@
                 "summary": "Lista todos os usuários da API",
                 "description": "Rota responsável pela listagem de usuários da API, com paginação, incluindo usuários administradores.",
                 "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "limit"
+                    },
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "offset"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK: Tarefa realizada com sucesso.",
@@ -89,67 +105,597 @@
                 }
             }
         },
-        "/usuario/findById/:id":{
+        "/usuario/findById/{id}":{
             "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "summary": "Lista um usuário a partir do seu ID",
                 "description": "Rota responsável pela procura de um único usuário a partir do ID colocado como parâmetro na requisição.",
                 "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "id"
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK: Tarefa realizada com sucesso."
+                        "description": "OK: Tarefa realizada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token."
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "NOT FOUND: Usuário não encontrado."
+                        "description": "NOT FOUND: Nenhum usuário encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação."
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }                       
+                }
+            }
+        },
+        "/usuario/create":{
+            "post": {
+                "summary": "Cria um usuário novo no sistema",
+                "description": "Rota responsável pela criação individual de usuários dentro da API, seguindo os requisitos de informações origatórias e padrões.",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Usuario"
+                        },
+                        "name": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "CREATED: Retorna o usuário criado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
-        "/usuario/remove/:id":{},
-        "/usuario/upstring/:id":{},
-        "/usuario/create":{},
-        "/usuario/addAddress/:id":{},
-        "/usuario/removeAddress/:id":{},
-        "/usuario/addPedido/:id":{},
+        "/usuario/update/{id}":{
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Atualiza informações de um usuário existente no sistema",
+                "description": "Rota responsável pela atualização individual de usuários dentro da API, seguindo os requisitos de informações origatórias e padrões.",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Usuario"
+                        },
+                        "name": "body"
+                    },
+                    {
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK: Retorna o usuário atualizado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND: Nenhum usuário encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuario/delete/{id}":{
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Deleta um usuário existente no sistema",
+                "description": "Rota responsável pela deleção individual de usuários dentro da API.",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK: Retorna o usuário deletado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND: Nenhum usuário encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuario/addAddress/{id}":{
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Adiciona endereços a um usuário existente no sistema",
+                "description": "Rota responsável pela atualização individual de usuários dentro da API, adicionando endereços dentro do banco de dados.",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/UserAddress"
+                        },
+                        "name": "body"
+                    },
+                    {
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "CREATED: Retorna o usuário com o(s) endereço(s) adicionado(s).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND: Nenhum usuário encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuario/removeAddress/{id}":{
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Remove endereços a um usuário existente no sistema",
+                "description": "Rota responsável pela deleção individual de endereços de usuários dentro da API.",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/UserAddress"
+                        },
+                        "name": "body"
+                    },
+                    {
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK: Retorna o usuário com endereços atualizados.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND: Nenhum usuário encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuario/addPedido/{id}":{
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Adiciona um pedido a um usuário existente no sistema",
+                "description": "Rota responsável pela atualização individual de usuários dentro da API, adicionando pedidos dentro do banco de dados.",
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/UserPedido"
+                        },
+                        "name": "body"
+                    },
+                    {
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "CREATED: Retorna o usuário com o(s) pedido(s) adicionado(s).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UNAUTHORIZED: Erro de autenticação. Problemas com o token.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND: Nenhum usuário encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "INTERNAL SERVER ERROR: Servidor captou um erro e não processou a solicitação.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
         "/pizza/findAll":{},
-        "/pizza/findById/:id":{},
-        "/pizza/remove/:id":{},
-        "/pizza/upstring/:id":{},
+        "/pizza/findById/{id}":{},
+        "/pizza/remove/{id}":{},
+        "/pizza/upstring/{id}":{},
         "/pizza/create":{},
-        "/pizza/addSabor/:id":{},
-        "/pizza/removeSabor/:id":{},
+        "/pizza/addSabor/{id}":{},
+        "/pizza/removeSabor/{id}":{},
 
         "/tamanho/findAll":{},
-        "/tamanho/findById/:id":{},
-        "/tamanho/remove/:id":{},
-        "/tamanho/upstring/:id":{},
+        "/tamanho/findById/{id}":{},
+        "/tamanho/remove/{id}":{},
+        "/tamanho/upstring/{id}":{},
         "/tamanho/create":{},
 
         "/sabor/findAll":{},
-        "/sabor/findById/:id":{},
-        "/sabor/remove/:id":{},
-        "/sabor/upstring/:id":{},
+        "/sabor/findById/{id}":{},
+        "/sabor/remove/{id}":{},
+        "/sabor/upstring/{id}":{},
         "/sabor/create":{},
 
         "/carrinho/findAll":{},
-        "/carrinho/findById/:id":{},
-        "/carrinho/remove/:id":{},
-        "/carrinho/upstring/:id":{},
+        "/carrinho/findById/{id}":{},
+        "/carrinho/remove/{id}":{},
+        "/carrinho/upstring/{id}":{},
         "/carrinho/create":{},
-        "/carrinho/addPizza/:id":{},
-        "/carrinho/removePizza/:id":{},
+        "/carrinho/addPizza/{id}":{},
+        "/carrinho/removePizza/{id}":{},
         
         "/pedido/findAll":{},
-        "/pedido/findById/:id":{},
-        "/pedido/remove/:id":{},
-        "/pedido/upstringStatus/:id":{},
-        "/pedido/cancelStatus/:id":{},
+        "/pedido/findById/{id}":{},
+        "/pedido/remove/{id}":{},
+        "/pedido/upstringStatus/{id}":{},
+        "/pedido/cancelStatus/{id}":{},
         "/pedido/create":{}
     },
     "components": {
@@ -219,6 +765,47 @@
                     },
                     "admin": {
                         "type": "boolean"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UserAddress": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "logradouro": {
+                            "type": "string"
+                        },
+                        "numero": {
+                            "type": "number"
+                        },
+                        "bairro": {
+                            "type": "string"
+                        },
+                        "cidade": {
+                            "type": "string"
+                        },"uf": {
+                            "type": "string"
+                        },
+                        "complemento": {
+                            "type": "string"
+                        },
+                        "cep": {
+                            "type": "string"
+                        },
+                        "createdAt": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "UserPedido": {
+                "type": "array",
+                "properties": {
+                    "_id": {
+                        "type": "string"
                     },
                     "createdAt": {
                         "type": "string"
