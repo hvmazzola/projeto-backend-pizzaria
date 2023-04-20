@@ -7,7 +7,7 @@ const paginacao = require("../middleware/paginacao.middleware");
 
 // rotas get
 router.get("/findById/:id", authMiddleware, validaIdParams, saborController.findSaborByIdController);
-router.get("/findall", authMiddleware, paginacao, saborController.findAllSaboresController);
+router.get("/findAll", authMiddleware, paginacao, saborController.findAllSaboresController);
 
 // rotas post
 router.post("/create", authMiddleware, validaSabor, saborController.createSaborController);

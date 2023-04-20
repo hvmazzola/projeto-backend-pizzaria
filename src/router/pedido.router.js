@@ -7,7 +7,7 @@ const paginacao = require("../middleware/paginacao.middleware");
 
 // rotas get
 router.get("/findById/:id", authMiddleware, validaIdParams, pedidoController.findPedidoByIdController);
-router.get("/findall", authMiddleware, paginacao, pedidoController.findAllPedidosController);
+router.get("/findAll", authMiddleware, paginacao, pedidoController.findAllPedidosController);
 
 // rotas post
 router.post("/create", authMiddleware, validaPizzasCarrinhoPedido, validaPedido, pedidoController.createPedidoController);

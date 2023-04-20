@@ -322,14 +322,14 @@
                 }
             }
         },
-        "/usuario/delete/{id}":{
+        "/usuario/remove/{id}":{
             "delete": {
                 "security": [
                     {
                         "bearerAuth": []
                     }
                 ],
-                "summary": "Deleta um usuário existente no sistema",
+                "summary": "Remove um usuário existente no sistema",
                 "description": "Rota responsável pela deleção individual de usuários dentro da API.",
                 "tags": ["User"],
                 "parameters": [
