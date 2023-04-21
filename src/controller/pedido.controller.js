@@ -1,4 +1,5 @@
 const pedidoService = require("../service/pedido.service");
+const pizzaService = require("../service/pizza.service");
 
 
 const findPedidoByIdController = async (req, res) => {

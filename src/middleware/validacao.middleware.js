@@ -250,16 +250,6 @@ const validaPizzasCarrinhoPedido = (req, res, next) => {
             return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos. Tente novamente!`});
         };
     });
-
-    
-
-    if(erros.length == 0) {
-        return next();
-    } else if(erros.length == 1) {
-        return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido. Tente novamente!`});
-    } else {
-        return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos. Tente novamente!`});
-    };
 };
 
 module.exports = {
