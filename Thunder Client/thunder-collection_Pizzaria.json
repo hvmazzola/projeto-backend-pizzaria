@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Pizzaria",
-    "dateExported": "2023-04-19T18:14:20.638Z",
+    "dateExported": "2023-04-24T16:38:23.525Z",
     "version": "1.1",
     "folders": [
         {
@@ -172,12 +172,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-04-12T20:44:23.473Z",
-            "modified": "2023-04-17T18:20:27.199Z",
+            "modified": "2023-04-21T21:00:14.980Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nome\": \"Gigante\",\n  \"diametro\": 42,\n  \"qntSabores\": 3,\n  \"valorBase\": 55.9,\n  \"bordaGratuita\": true\n}",
+                "raw": "{\n  \"nome\": \"Broto\",\n  \"diametro\": 25,\n  \"qntSabores\": 1,\n  \"valorBase\": 29.9,\n  \"bordaGratuita\": false\n}",
                 "form": []
             },
             "auth": {
@@ -195,12 +195,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-04-13T17:05:18.993Z",
-            "modified": "2023-04-17T17:33:39.009Z",
+            "modified": "2023-04-21T21:02:20.377Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"tamanho\": {\n  }\n}",
+                "raw": "{\n  \"tamanho\": {\n    \"_id\": \"6442f95e83d66d965b7a17f2\"\n  },\n  \"temBorda\": false,\n  \"valorTotal\": 29.9\n}",
                 "form": []
             },
             "auth": {
@@ -218,12 +218,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-04-14T16:19:14.828Z",
-            "modified": "2023-04-19T17:44:50.188Z",
+            "modified": "2023-04-21T21:42:00.998Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"pizzas\": [\n    {\n      \"_id\": \"643d6b742c91e150d5e46baf\",\n      \"qnt\": 2\n    }\n  ],\n  \"precoTotal\": 105.8\n}",
+                "raw": "{\n  \"pizzas\": [\n    {\n      \"_id\": \"6442f9dc83d66d965b7a17fe\",\n      \"qnt\": 2\n    }\n  ],\n  \"precoTotal\": 59.8\n}",
                 "form": []
             },
             "auth": {
@@ -241,12 +241,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-04-14T18:33:19.875Z",
-            "modified": "2023-04-18T15:26:51.730Z",
+            "modified": "2023-04-21T21:28:11.877Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"pizzas\": [\n    {\n      \"_id\": \"643d6b742c91e150d5e46baf\",\n      \"qnt\": 2\n    }\n  ],\n  \"precoTotal\": 105.8\n}",
+                "raw": "{\n  \"pizzas\": [\n    {\n      \"_id\": \"6442f9dc83d66d965b7a17fb\",\n      \"qnt\": 2\n    }\n  ],\n  \"precoTotal\": 59.8\n}",
                 "form": []
             },
             "auth": {
@@ -264,12 +264,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-04-17T15:37:36.535Z",
-            "modified": "2023-04-17T18:04:12.750Z",
+            "modified": "2023-04-21T21:16:36.755Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nome\": \"4 queijos\",\n  \"valorAdicional\": 0\n}",
+                "raw": "{\n  \"nome\": \"prestigio\",\n  \"valorAdicional\": 0\n}",
                 "form": []
             },
             "auth": {
@@ -283,11 +283,11 @@
             "colId": "bc74ffea-6fdb-41cf-9be6-608efb778856",
             "containerId": "3c588be8-88d3-467f-9256-badbcf9d3511",
             "name": "Update Status",
-            "url": "{{BaseURL}}{{Port}}/pedido/updateStatus/643d75caf7187f896ccc83a7",
+            "url": "{{BaseURL}}{{Port}}/pedido/updateStatus/6443034e60babeeaab6e6ad8",
             "method": "PATCH",
             "sortNum": 25000,
             "created": "2023-04-14T18:50:34.241Z",
-            "modified": "2023-04-17T16:40:01.992Z",
+            "modified": "2023-04-21T21:43:30.485Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -301,11 +301,11 @@
             "colId": "bc74ffea-6fdb-41cf-9be6-608efb778856",
             "containerId": "3c588be8-88d3-467f-9256-badbcf9d3511",
             "name": "Cancel Status",
-            "url": "{{BaseURL}}{{Port}}/pedido/cancelStatus/6439a87933245adff4e8a4cf",
+            "url": "{{BaseURL}}{{Port}}/pedido/cancelStatus/6443034e60babeeaab6e6ad8",
             "method": "PATCH",
             "sortNum": 27500,
             "created": "2023-04-14T19:24:23.529Z",
-            "modified": "2023-04-14T19:25:24.363Z",
+            "modified": "2023-04-21T21:43:40.145Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -355,11 +355,11 @@
             "colId": "bc74ffea-6fdb-41cf-9be6-608efb778856",
             "containerId": "2b8b180a-0371-4e1c-a759-82a7b2c0976f",
             "name": "FindByID",
-            "url": "{{BaseURL}}{{Port}}/pizza/findById/643d6b742c91e150d5e46baf",
+            "url": "{{BaseURL}}{{Port}}/pizza/findById/6442f9dc83d66d965b7a17fb",
             "method": "GET",
             "sortNum": 30000,
             "created": "2023-04-13T17:05:18.994Z",
-            "modified": "2023-04-19T15:33:53.271Z",
+            "modified": "2023-04-21T21:03:44.874Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -391,11 +391,11 @@
             "colId": "bc74ffea-6fdb-41cf-9be6-608efb778856",
             "containerId": "3c588be8-88d3-467f-9256-badbcf9d3511",
             "name": "FindByID",
-            "url": "{{BaseURL}}{{Port}}/pedido/findById/6439a4a0955f0cd495650b6a",
+            "url": "{{BaseURL}}{{Port}}/pedido/findById/6443034e60babeeaab6e6ad8",
             "method": "GET",
             "sortNum": 30000,
             "created": "2023-04-14T18:33:19.876Z",
-            "modified": "2023-04-14T19:14:04.386Z",
+            "modified": "2023-04-21T21:43:35.689Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -803,16 +803,16 @@
             "colId": "bc74ffea-6fdb-41cf-9be6-608efb778856",
             "containerId": "2b8b180a-0371-4e1c-a759-82a7b2c0976f",
             "name": "Add Sabor",
-            "url": "{{BaseURL}}{{Port}}/pizza/addSabor/643d6b742c91e150d5e46baf",
+            "url": "{{BaseURL}}{{Port}}/pizza/addSabor/6442f9dc83d66d965b7a17fb",
             "method": "POST",
             "sortNum": 100000,
             "created": "2023-04-13T17:08:23.089Z",
-            "modified": "2023-04-19T17:27:09.764Z",
+            "modified": "2023-04-21T21:05:29.424Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"_id\": \"643d6aaf2c91e150d5e46ba8\"\n}",
+                "raw": "{\n  \"_id\": \"6442fa0b83d66d965b7a1804\"\n}",
                 "form": []
             },
             "auth": {
