@@ -20,65 +20,10 @@ const removeUserService = (id) => {
     return Usuario.findByIdAndRemove(id);
 };
 
-const addUserAddressService = (id, endereco) => {
-    return Usuario.findOneAndUpdate(
-        {
-            _id: id,
-        },
-        {
-            $push:{
-                enderecos: endereco,
-            }
-        },
-        {
-            rawResult: true,
-        }
-    );
-};
-
-const removeUserAddressService = (id, addressId) => {
-    return Usuario.findOneAndUpdate(
-        {
-            _id: id,
-        },
-        {
-            $pull:{
-                enderecos: {
-                    _id: addressId,
-                },
-            }
-        },
-        {
-            rawResult: true,
-        }
-    );
-};
-
-const addUserPedidoService = (id, pedido) => {
-    return Usuario.findOneAndUpdate(
-        {
-            _id: id,
-        },
-        {
-            $push: {
-                pedidos: {
-                    _id: pedido._id,
-                },
-            },
-        },
-        {
-            rawResult: true,
-        }
-    );
-};
-
 module.exports = {
     findUserByIdService,
     findAllUsersService,
     createUserService,
     updateUserService,
-    removeUserService,
-    addUserAddressService,
-    removeUserAddressService,
-    addUserPedidoService
+    removeUserService
 }

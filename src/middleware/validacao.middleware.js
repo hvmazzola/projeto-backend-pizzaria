@@ -24,55 +24,19 @@ const validaUsuario = (req, res, next) => {
     };
 };
 
-const validaEndereco = (req, res, next) => {
+const validaProject = (req, res, next) => {
     let erros = [];
 
-    req.body.map((value, key) => {
-        if(value.logradouro == null){
-            erros.push(`'${key+1} - logradouro'`);
-        }
-
-        if(value.numero == null){
-            erros.push(`'${key+1} - numero'`);
-        }
-    
-        if(value.bairro == null){
-            erros.push(`'${key+1} - bairro'`);
-        }
-    
-        if(value.cidade == null){
-            erros.push(`'${key+1} - cidade'`);
-        }
-
-        if(value.uf == null){
-            erros.push(`'${key+1} - uf'`);
-        }
-
-        if(value.cep == null){
-            erros.push(`'${key+1} - cep'`);
-        }
-    });
-
-    
-
-    if(erros.length == 0) {
-        return next();
-    } else if(erros.length == 1) {
-        return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido. Tente novamente!`});
-    } else {
-        return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos. Tente novamente!`});
-    };
-};
-
-const validaPizza = (req, res, next) => {
-    let erros = [];
-
-    if(req.body.valorTotal == null){
-        erros.push("valorTotal");
+    if(req.body.nome == null){
+        erros.push("nome");
     }
 
-    if(req.body.tamanho._id == null){
-        erros.push("tamanho._id");
+    if(req.body.descricao == null){
+        erros.push("descricao");
+    }
+
+    if(req.body.linguagem == null){
+        erros.push("linguagem");
     }
 
     if(erros.length == 0) {
@@ -84,7 +48,7 @@ const validaPizza = (req, res, next) => {
     };
 };
 
-const validaSaboresPizza = (req, res, next) => {
+const validaFerramentasProject = (req, res, next) => {
 
     if(req.body._id == null){
         return res.status(400).send({ message: "O campo '_id' precisa ser preenchido. Tente novamente!"});
@@ -93,92 +57,21 @@ const validaSaboresPizza = (req, res, next) => {
     return next();
 };
 
-const validaTamanho = (req, res, next) => {
+const validaFerramenta = (req, res, next) => {
     let erros = [];
 
     if(req.body.nome == null){
         erros.push("nome");
     }
 
-    if(req.body.diametro == null){
-        erros.push("diametro");
-    }
-
-    if(req.body.qntSabores == null){
-        erros.push("qntSabores");
-    }
-    
-    if(req.body.valorBase == undefined){
-        erros.push("valorBase");
-    }
-
-    if(req.body.bordaGratuita == null){
-        erros.push("bordaGratuita");
-    }
-
     if(erros.length == 0) {
         return next();
-    } else if(erros.length == 1) {
-        return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido. Tente novamente!`});
     } else {
-        return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos. Tente novamente!`});
+        return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido. Tente novamente!`});
     };
 };
 
-const validaSabor = (req, res, next) => {
-    let erros = [];
-
-    if(req.body.nome == null){
-        erros.push("nome");
-    }
-
-    if(req.body.valorAdicional == null){
-        erros.push("valorAdicional");
-    }
-
-    if(erros.length == 0) {
-        return next();
-    } else if(erros.length == 1) {
-        return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido. Tente novamente!`});
-    } else {
-        return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos. Tente novamente!`});
-    };
-};
-
-const validaPedido = (req, res, next) => {
-
-    if(req.body.pizzas == null){
-        return res.status(400).send({ message: `Não é possível criar um pedido sem pizzas. Tente novamente!`});;
-    }
-
-    if(req.body.precoTotal == null){
-        return res.status(400).send({ message: `O campo "precoTotal" precisa ser preenchido. Tente novamente!`});
-    }
-    
-    return next();
-    
-};
-
-const validaCarrinho = (req, res, next) => {
-
-    if(req.body.precoTotal == null){
-        return res.status(400).send({ message: "O campo 'precoTotal' precisa ser preenchido. Tente novamente!"});
-    }
-    
-    return next();
-};
-
-const validaAddPedido = (req, res, next) => {
-
-    if(req.body._id == null){
-        return res.status(400).send({ message: "O campo '_id' precisa ser preenchido. Tente novamente!"});
-    }
-    
-    return next();
-    
-};
-
-const validaAddPizza = (req, res, next) => {
+const validaAddProject = (req, res, next) => {
 
     if(req.body._id == null){
         return res.status(400).send({ message: "O campo '_id' precisa ser preenchido. Tente novamente!"});
@@ -226,45 +119,13 @@ const validaLogin = (req, res, next) => {
     }; 
 };
 
-const validaPizzasCarrinhoPedido = (req, res, next) => {
-    let erros = [];
-
-    req.body.pizzas.map((value, key) => {
-        if(value._id == null){
-            erros.push(`'${key+1} - ID'`);
-        }
-
-        if(!objectId.isValid(value._id)){
-            erros.push(`'${key+1} - ID - Tipo inválido'`);
-        }
-
-        if(value.qnt == null){
-            erros.push(`'${key+1} - quantidade'`);
-        }
-
-        if(erros.length == 0) {
-            return next();
-        } else if(erros.length == 1) {
-            return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido. Tente novamente!`});
-        } else {
-            return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos. Tente novamente!`});
-        };
-    });
-};
-
 module.exports = {
     validaUsuario,
-    validaEndereco,
-    validaPizza,
-    validaSaboresPizza,
-    validaTamanho,
-    validaSabor,
-    validaPedido,
-    validaCarrinho,
-    validaAddPedido,
-    validaAddPizza,
+    validaProject,
+    validaFerramentasProject,
+    validaFerramenta,
+    validaAddProject,
     validaIdParams,
     validaIdBody,
-    validaLogin,
-    validaPizzasCarrinhoPedido
+    validaLogin
 };
