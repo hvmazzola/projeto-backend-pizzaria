@@ -3,27 +3,9 @@ const bcrypt = require ("bcrypt");
 
 const UsuarioSchema = new mongoose.Schema({
     nome: { type: String, required: true },
-    email: { type: String, unique: true, required: true },
+    email: { type: String, unique: true },
     senha: { type: String, unique: true, required: true },
     imagem: { type: String },
-    enderecos: [
-        {
-            logradouro: { type: String, required: true },
-            numero: { type: Number, required: true },
-            bairro: { type: String, required: true },
-            cidade: { type: String, required: true },
-            uf: { type: String, required: true },
-            complemento: { type: String },
-            cep: { type: String, required: true },
-            createdAt: { type: Date, required: true, default: Date.now() }
-        }
-    ],
-    pedidos: [
-        {
-            _id: { type: mongoose.Schema.Types.ObjectId, unique: true, ref: "pedidos"},
-            createdAt: { type: Date, required: true, default: Date.now() }
-        }
-    ],
     admin: { type: Boolean, required: true, default: false },
     createdAt: { type: Date, required: true, default: Date.now() },
 });
